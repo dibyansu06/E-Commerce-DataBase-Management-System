@@ -7,7 +7,6 @@ This is a simple e-commerce website implemented using Flask, Flask-Login for use
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [File Structure](#file-structure)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -68,4 +67,10 @@ This is a simple e-commerce website implemented using Flask, Flask-Login for use
     FLUSH PRIVILEGES;
      ```
      Change 'ricky' to your username.
+
+## Contributing
+Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request.
+
+## License
+This project is licensed under the MIT License.
    
