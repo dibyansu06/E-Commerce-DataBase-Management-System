@@ -61,7 +61,7 @@ This is a simple e-commerce website implemented using Flask, Flask-Login for use
 3. In app.py change the username and password.
    ```
    db = pymysql.connect(host='localhost', user='ricky', password='mysql@root', database='e_commerce')
-4. Also change the premission in the queires file
+4. Also change the premission in the queries file
      ```
      CREATE USER 'ricky'@'localhost' IDENTIFIED BY 'mysql@root';
     GRANT ALL PRIVILEGES ON e_commerce.* TO 'ricky'@'localhost';
