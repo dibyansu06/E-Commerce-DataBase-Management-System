@@ -6,10 +6,8 @@ import pymysql
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysql'
 
-# Configure the MySQL connection
 db = pymysql.connect(host='localhost', user='ricky', password='mysql@root', database='e_commerce')
 
-# Configure Flask-Login
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 
@@ -18,7 +16,6 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
-    # Retrieve user from the database based on user_id
     with db.cursor() as cursor:
         cursor.execute("SELECT * FROM users WHERE user_id = %s", (user_id,))
         user_data = cursor.fetchone()
@@ -32,8 +29,6 @@ def load_user(user_id):
         user.password_hash = user_data[4]  # password_hash is the fifth column
         return user
 
-# ... (existing code)
-
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -45,8 +40,7 @@ def login():
             cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
             user_data = cursor.fetchone()
 
-        if user_data and check_password_hash(user_data[4], password):  # Assuming 'password_hash' is the fifth column
-            # Existing user login
+        if user_data and check_password_hash(user_data[4], password): 
             user = User()
             user.id = user_data[0]  # user_id is the first column
             user.username = user_data[1]  # username is the second column
@@ -106,7 +100,7 @@ def register():
 @app.route('/dashboard')
 def dashboard():
     if current_user.is_authenticated:
-        if current_user.username == 'admin':  # You can replace this condition with your own logic
+        if current_user.username == 'admin':  
             return redirect(url_for('admin_dashboard'))
         else:
             return redirect(url_for('customer_dashboard'))
@@ -147,8 +141,6 @@ def get_ordered_items(user_id):
     ordered_items = []
     try:
         with db.cursor(pymysql.cursors.DictCursor) as cursor:
-            # Assuming you have a table named 'orders' to store order information
-            # Adjust the query based on your data model
             query = """
                 SELECT p.product_name, o.quantity, p.price
                 FROM orders o
@@ -167,11 +159,9 @@ def get_ordered_items(user_id):
 @login_required
 def customer_dashboard():
     if current_user.is_authenticated and current_user.role == 'customer':
-        # Fetch data for available products and ordered items
-        products = get_available_products()  # Implement this function to retrieve products
-        order_items = get_ordered_items(current_user.id)  # Implement this function to retrieve ordered items
+        products = get_available_products() 
+        order_items = get_ordered_items(current_user.id) 
 
-        # Print or log the data to check
         print("Available Products:", products)
         print("Ordered Items:", order_items)
 
@@ -197,7 +187,6 @@ def order_product(product_id):
         return redirect(url_for('customer_dashboard'))
 
     except BadRequestKeyError:
-        # Redirect with an error flash message if 'quantity' is not present in the form data
         flash('Invalid request. Please try again.', 'error')
         return redirect(url_for('customer_dashboard'))
 
@@ -275,13 +264,11 @@ def get_order_details(order_id):
 
     # Fetch order details
     with db.cursor(pymysql.cursors.DictCursor) as cursor:
-        # Replace the following query with your actual query
         cursor.execute("SELECT * FROM orders WHERE order_id = %s AND user_id = %s", (order_id, current_user.id))
         order_details['order'] = cursor.fetchone()
 
     # Fetch order items
     with db.cursor(pymysql.cursors.DictCursor) as cursor:
-        # Replace the following query with your actual query
         cursor.execute("SELECT * FROM order_items WHERE order_id = %s", (order_id,))
         order_details['items'] = cursor.fetchall()
 
@@ -292,7 +279,6 @@ def get_order_details(order_id):
 def view_orders():
     # Retrieve orders from the database
     with db.cursor() as cursor:
-        # Modify the query to join the orders and order_items tables
         cursor.execute("""
                         SELECT orders.order_id, orders.order_date, order_items.product_id, order_items.quantity, order_items.price, products.product_name
                         FROM orders
@@ -301,7 +287,7 @@ def view_orders():
                     """)
         orders = cursor.fetchall()
 
-    print(orders)  # Print orders to the console for debugging
+    print(orders) 
 
     return render_template('view_orders.html', orders=orders)
 
