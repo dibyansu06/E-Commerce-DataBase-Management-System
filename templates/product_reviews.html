@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .product-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-header {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .review-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .review-item {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .rating {
+            color: #007bff;
+            font-size: 18px;
+        }
+
+        .comment {
+            color: #555;
+        }
+
+        .no-reviews {
+            color: #888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Product Reviews</h2>
+
+    {% for product in products %}
+        <div class="product-container">
+            <h3 class="product-header">{{ product.product_name }}</h3>
+            {% if product.reviews %}
+                <ul class="review-list">
+                    {% for review in product.reviews %}
+                        <li class="review-item">
+                            <span class="rating">Rating: {{ product.average_rating }}</span><br>
+                            <span class="comment">Comment: {{ review.comment }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-reviews">No reviews available for this product.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 40px; /* Increase padding for a larger container */
+    border-radius: 12px; /* Increase border-radius for rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 15px; /* Increase margin for labels */
+    font-size: 18px; /* Increase font size for labels */
+}
+
+input {
+    padding: 15px; /* Increase padding for input fields */
+    margin-bottom: 20px; /* Increase margin for input fields */
+    font-size: 18px; /* Increase font size for input fields */
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 15px; /* Increase padding for the button */
+    border: none;
+    border-radius: 6px; /* Increase border-radius for rounded corners */
+    cursor: pointer;
+    font-size: 18px; /* Increase font size for the button */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: #ff0000;
+    margin-top: 20px; /* Increase margin for error messages */
+    font-size: 16px; /* Adjust font size for error messages */
+}
