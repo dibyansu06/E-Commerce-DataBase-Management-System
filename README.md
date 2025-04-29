@@ -38,7 +38,7 @@ This is a simple e-commerce website implemented using Flask, Flask-Login for use
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/e-commerce-flask.git
+   git clone https://github.com/dibyansu06/e-commerce-flask.git
 2. Install dependencies
    ```bash
    pip install -r requirements.txt
